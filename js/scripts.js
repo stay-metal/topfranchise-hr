@@ -9,7 +9,7 @@ $(document).ready(function () {
     dots: true,
     autoplay: true,
     slideTransition: "linear",
-    autoplayTimeout: 6000,
+    autoplayTimeout: 1000,
     autoplaySpeed: 12000,
     autoplayHoverPause: true,
     autoWidth: true,
@@ -41,7 +41,7 @@ $(document).ready(function () {
   });
 
   $(".js-tophr__cards-items").owlCarousel({
-    items: 2,
+    items: 1,
     loop: false,
     nav: false,
     dots: false,
@@ -63,3 +63,44 @@ $(document).ready(function () {
     owl.trigger("prev.owl.carousel");
   });
 });
+
+const nextCardsEl = document.getElementsByClassName("js-tophr__cards-title__icon")[0];
+nextCardsEl.addEventListener(
+  "click",
+  function (e) {
+    // Get the total number of items
+    var totalItems = $(".js-tophr__cards-items").find(".owl-item").length;
+    var currentItemIndex = $(".js-tophr__cards-items").find(".owl-item.active").index();
+    console.log("Total ", totalItems);
+    console.log("Current ", currentItemIndex);
+    if (window.matchMedia("(min-width: 900px)").matches) {
+      console.log("Media ", 900);
+      if (currentItemIndex + 1 === 3) {
+        // Reset the carousel to the first item
+        $(".js-tophr__cards-items").trigger("to.owl.carousel", [0]);
+      } else {
+        // Move to the next item
+        $(".js-tophr__cards-items").trigger("next.owl.carousel");
+      }
+      // $(".js-tophr__cards-items").trigger("next.owl.carousel");
+    } else if (window.matchMedia("(min-width: 600px)").matches) {
+      console.log("Media ", 600);
+      if (currentItemIndex + 1 === 4) {
+        // Reset the carousel to the first item
+        $(".js-tophr__cards-items").trigger("to.owl.carousel", [0]);
+      } else {
+        // Move to the next item
+        $(".js-tophr__cards-items").trigger("next.owl.carousel");
+      }
+    } else {
+      if (currentItemIndex + 1 === 5) {
+        // Reset the carousel to the first item
+        $(".js-tophr__cards-items").trigger("to.owl.carousel", [0]);
+      } else {
+        // Move to the next item
+        $(".js-tophr__cards-items").trigger("next.owl.carousel");
+      }
+    }
+  },
+  false,
+);
